@@ -5,13 +5,16 @@ import { getSinglePokemonDetails } from '../api/pokemon';
 import Header from '../components/pokemon/Header';
 import Type from '../components/pokemon/Type';
 import Stats from '../components/pokemon/Stats';
+import Favorite from '../components/pokemon/Favorites';
+import useAuth from '../hooks/useAuth';
 
 export default function Pokemon({ navigation, route: {params} }) {
   const [pokemon, setPokemon] = useState(null);
-  
+  const { auth } = useAuth();
+
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => null,
+      headerRight: () => auth && <Favorite pokemon={pokemon?.id} /> ,
       headerLeft: () => (
         <Icon
           name="arrow-left"
@@ -22,7 +25,7 @@ export default function Pokemon({ navigation, route: {params} }) {
         />
       ),
     });
-  }, [navigation, params]);
+  }, [navigation, params, pokemon]);
 
 
   useEffect(()=>{
@@ -35,6 +38,8 @@ export default function Pokemon({ navigation, route: {params} }) {
       }
     })();
   }, [params])
+
+  if(!pokemon) return null;
 
   return (
     <ScrollView>

@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 export default function Navigation() {
   return (
     <Tab.Navigator initialRouteName='pokedex' >
-        <Tab.Screen name='favorites' component={FavoritesNavigation} options={{ title:'', headerTransparent: true, tabBarLabel:'Favoritos', tabBarIcon: ({ color, size })=><Icon name='heart' color={color} size={size} /> }} />
+        <Tab.Screen name='favorites' component={FavoritesNavigation} options={{ header: ()=>null, tabBarLabel:'Favoritos', tabBarIcon: ({ color, size })=><Icon name='heart' color={color} size={size} /> }} />
         <Tab.Screen name='pokedex' component={PokedexNavigation} options={{ header: ()=>null, tabBarLabel:'', tabBarIcon: renderPokeball }} />
         <Tab.Screen name='account' component={AccountNavigation} options={{ title:'', headerTransparent: true, tabBarLabel:'Mi cuenta', tabBarIcon: ({ color, size })=><Icon name='user' color={color} size={size} /> }} />
     </Tab.Navigator>
